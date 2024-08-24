@@ -1,19 +1,25 @@
 <template>
-  <div id="app">
-    <h1>Todo App</h1>
+  <div id="app" class="max-w-md mx-auto p-6 bg-gray-100 min-h-screen">
+    <h1 class="text-3xl font-bold mb-4 text-center text-blue-600">Todo App</h1>
     <input 
       v-model="newTodo" 
       @keyup.enter="addTodo" 
       placeholder="Add a new todo"
+      class="w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
     >
-    <ul>
-      <li v-for="(todo, index) in todos" :key="index">
+    <ul class="space-y-2">
+      <li v-for="(todo, index) in todos" :key="index" class="flex items-center bg-white p-3 rounded shadow">
         <input 
           type="checkbox" 
           v-model="todo.completed"
+          class="mr-2 form-checkbox h-5 w-5 text-blue-600"
         >
-        <span :class="{ completed: todo.completed }">{{ todo.text }}</span>
-        <button @click="removeTodo(index)">Delete</button>
+        <span :class="{ 'line-through text-gray-500': todo.completed }" class="flex-grow">
+          {{ todo.text }}
+        </span>
+        <button @click="removeTodo(index)" class="ml-2 px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">
+          Delete
+        </button>
       </li>
     </ul>
   </div>
@@ -45,38 +51,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Arial, sans-serif;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.completed {
-  text-decoration: line-through;
-  color: #888;
-}
-
-button {
-  margin-left: 10px;
-}
-</style>
