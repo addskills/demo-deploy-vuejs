@@ -8,7 +8,7 @@
       class="w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
     >
     <ul class="space-y-2">
-      <li v-for="(todo, index) in todos" :key="index" class="flex items-center bg-white p-3 rounded shadow">
+      <li v-for="(todo, index) in todoStore.todos" :key="index" class="flex items-center bg-white p-3 rounded shadow">
         <input 
           type="checkbox" 
           v-model="todo.completed"
@@ -26,27 +26,22 @@
 </template>
 
 <script>
+import { todoStore } from './todoStore.js'
+
 export default {
   data() {
     return {
       newTodo: '',
-      todos: [
-        { text: 'Learn Vue', completed: false },
-        { text: 'Build a todo app', completed: false },
-        { text: 'Master Vue', completed: false }
-      ]
+      todoStore
     }
   },
   methods: {
     addTodo() {
-      if (this.newTodo.trim().length === 0) {
-        return
-      }
-      this.todos.push({ text: this.newTodo, completed: false })
+      this.todoStore.addTodo(this.newTodo)
       this.newTodo = ''
     },
     removeTodo(index) {
-      this.todos.splice(index, 1)
+      this.todoStore.removeTodo(index)
     }
   }
 }
