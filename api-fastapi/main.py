@@ -1,4 +1,5 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, APIRouter
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, Column, Integer, String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
@@ -35,6 +36,14 @@ class Todo(BaseModel):
         orm_mode = True
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8080"],  # Adjust this to match your Vue.js dev server port
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+router = APIRouter(prefix="/api")
 
 # Dependency to get the database session
 def get_db():
