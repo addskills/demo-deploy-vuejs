@@ -13,12 +13,11 @@ services:
     environment:
       - NODE_ENV=development
     command: npm run serve
-    # command: ["sleep", "1d"]
   api:
     build:
       context: api-fastapi
       dockerfile: Dockerfile.dev
-    container_name: fastapi-api-dev
+    container_name: vue-todo-api-dev
     volumes:
       - ./api-fastapi:/app
     ports:
@@ -26,4 +25,3 @@ services:
     environment:
       - DEBUG=1
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-    # command: sleep 1d
