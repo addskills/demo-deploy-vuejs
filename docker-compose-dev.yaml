@@ -6,6 +6,7 @@ services:
     container_name: vue-todo-app-dev
     volumes:
       - ./vue-todo-app:/app
+      - ./node_modules:/app/node_modules
       - ./vue-todo-app/public:/app/public
     ports:
       - "8080:8080"
