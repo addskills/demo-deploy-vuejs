@@ -1,12 +1,13 @@
+version: '3'
 services:
   vue-app:
     build:
-      context: vue-todo-app
+      context: ./vue-todo-app
       dockerfile: Dockerfile.dev
     container_name: vue-todo-app-dev
     volumes:
       - ./vue-todo-app:/app
-      - ./node_modules:/app/node_modules
+      - ./vue-todo-app/node_modules:/app/node_modules
       - ./vue-todo-app/public:/app/public
     ports:
       - "8080:8080"

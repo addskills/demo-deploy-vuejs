@@ -1,15 +1,15 @@
-FROM node:lts-alpine3.20
+FROM node:20
 
 WORKDIR /app
 
-RUN npm install -g @vue/cli-service
+COPY package*.json ./
 
-COPY package*.json .
+# Install Vue CLI globally
+RUN npm install -g @vue/cli
 
+# Install project dependencies
 RUN npm install
 
 COPY . .
-
-EXPOSE 8080
 
 CMD ["npm", "run", "serve"]
